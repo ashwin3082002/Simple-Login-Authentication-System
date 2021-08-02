@@ -1,6 +1,7 @@
 import json
 import uuid
 import random
+import string
 import smtplib
 from bcrypt import *
 
@@ -70,6 +71,7 @@ def main(n):
         login_info[unique]={'username':user,'password':passw,'details':{'Name':name,'Mobile':mobile,'Email ID':email,'Unique ID':unique}}
         if saving_file():
             print("User Succesfully Added!!!")
+            print("Your Unique Profile ID is:",unique)
     
     elif n==4:
         username_reset = input("Enter Your Username:")
@@ -158,17 +160,39 @@ def main(n):
         except:
             print("Error With Admin File")
         admin_u = input("Enter Admin Username:")
-        admin_p = input("Enter Password:")
+        admin_p = input("Enter Password:").encode('ASCII')
         if admin_u == admin_info['admin']['username']:
-            if admin_p == admin_info['admin']['password'] :
+            if checkpw(admin_p,admin_info['admin']['password'].encode('ASCII')):
                 print("Login Successfull!!")
                 print()
                 print('1. Print All Users')
-                print('2. Delete All Users')
+                print('2. Delete a User')
+                print('3. Reset Password for A User')
                 uc = int(input())
                 if uc==1:
                     print(login_info)
-
+                elif uc==2:
+                    print()
+                    unique_id_admin=input("Enter their Unique ID:")
+                    del login_info[unique_id_admin]
+                    if saving_file():
+                        print("Profile Deleted!! :(")
+                    else:
+                        print("Try Again #Profile Deletion error")
+                elif uc==3:
+                    def specific_string():  
+                        temp_pass = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!@#%?/' 
+                        result = ''.join((random.choice(temp_pass)) for x in range(10))  
+                        return result
+                    print()
+                    unique_id_admin=input("Enter their Unique ID:")
+                    temp_pass_user=str(specific_string())
+                    hash_temp_pass= hashpw(temp_pass_user.encode("ASCII"),gensalt())   
+                    login_info[unique_id_admin]['password']=hash_temp_pass.decode('ASCII')
+                    if saving_file():
+                        print("Temporary Password for ",login_info[unique_id_admin]['details']['Name'],'is',temp_pass_user)
+                    else:
+                        print("Try Again #Pass reset error")
             else:
                 print("Sorry!!! Wrong Admin Password...")
         else:

@@ -34,8 +34,8 @@ def email_auth(email, password, receiver):
     else:
         return False
 
-MY_EMAIL= 'sqlmy321@gmail.com'
-PASSWORD = 'As@123456'
+MY_EMAIL= 'google@gmail.com' #Enter Your Email-ID Here
+PASSWORD = 'google' #Enter Your Email Password Here
 
 def unique_id():
     return uuid.uuid1()
@@ -44,7 +44,7 @@ def unique_id():
 
 def saving_file():
     try:
-        with open('C:/Users/ashwi/Desktop/Python Programs/Password/new.txt', 'w') as convert_file:
+        with open('login_info.txt', 'w') as convert_file:
             convert_file.write(json.dumps(login_info))
         file.close()
         return True
@@ -53,7 +53,7 @@ def saving_file():
 
 try:
     login_info={}
-    file=open('C:/Users/ashwi/Desktop/Python Programs/Password/new.txt', 'r')
+    file=open('login_info.txt', 'r')
     login=file.read()
     login_info=json.loads(login)
     file.close()
@@ -153,7 +153,7 @@ def main(n):
     elif n==3:
         try:
             admin_info={}
-            file_a=open('C:/Users/ashwi/Desktop/Python Programs/Password/admin_info.txt', 'r')
+            file_a=open('admin_info.txt', 'r')
             admin=file_a.read()
             admin_info=json.loads(admin)
             file_a.close()

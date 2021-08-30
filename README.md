@@ -3,6 +3,7 @@
 <p></p>
 This ia a simple user login system which stores the user info in a text file. To secure the users password I have implemented hashing to store password and users will wil able to reset the password using an OTP sent to their Email ID.
 The user info is stored in a nested dictionary of the format in the login_info.txt file
+<p></p>
 
 **{unique_id:{'username':'username_of_user','password':'Hashed_Password','details':{"Name":"user_name",'mobile':'user_mobile_no','email id':'user_email_ID',"unique id":Unique ID}}}**
 
@@ -25,6 +26,7 @@ To test this file in your pc first star and fork this repo and clone this into y
 ```pip install requirements.txt ```
 
 Install the dependencies using this command 
+<p></p>
 Note: Correctly Specify the requirements.txt file location
 
 Then you are ready to go and test
